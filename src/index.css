@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base{
+
+    /*
+        Maybe use this color there -> #ffd644
+    */
   
     @font-face {
         font-family: titlefont;
