@@ -73,7 +73,7 @@ const Navbar: FC = () => {
                     <input type="file" onChange={handleFileOpen} id="open-file" className="hidden" />
                     <div className="relative inline-block">
                         <svg onClick={() => dispatch({type: TOGGLE_MENU_ACT})} xmlns="http://www.w3.org/2000/svg" className="m-2 h-7 w-7 cursor-pointer inline-block text-primecolor-100 hover:text-primecolor-150 active:text-primecolor-200" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
-                        <Dropdown />
+                        <Dropdown openFile={handleFileOpen} saveFile={saveFileHandler} nameFile={fileName} linkdownload={downloadLink} />
                     </div>
                 </div>
             </div>
