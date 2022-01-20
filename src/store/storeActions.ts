@@ -8,3 +8,5 @@ export const PUSH_REDO_ACT = "push-redo";
 export const PUSH_UNDO_ACT = "push-undo";
 export const POP_REDO_ACT = "pop-redo";
 export const POP_UNDO_ACT = "pop-undo"
+export const DO_UNDO_ACT = "do-undo";
+export const DO_REDO_ACT = "do-redo";

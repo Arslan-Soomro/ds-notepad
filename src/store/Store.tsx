@@ -1,10 +1,10 @@
 import { createContext, FC, useReducer } from "react";
 import StackList from "../utils/StackList";
-import { INITIALIZE_TEXT_ACT, INITIALIZE_SEARCH_ACT, TOGGLE_MENU_ACT, TOGGLE_REPLACE_ACT, UPDATE_REPLACE_ACT, UPDATE_SEARCH_ACT, PUSH_UNDO_ACT, POP_UNDO_ACT, PUSH_REDO_ACT, POP_REDO_ACT } from "./storeActions";
+import { INITIALIZE_TEXT_ACT, INITIALIZE_SEARCH_ACT, TOGGLE_MENU_ACT, TOGGLE_REPLACE_ACT, UPDATE_REPLACE_ACT, UPDATE_SEARCH_ACT, PUSH_UNDO_ACT, POP_UNDO_ACT, PUSH_REDO_ACT, POP_REDO_ACT, DO_UNDO_ACT, DO_REDO_ACT } from "./storeActions";
 
 export interface storeAction {
     type: string;
-    payload: any;
+    payload?: any;
 }
 
 export interface storeDataType{
@@ -41,12 +41,12 @@ const initialState: storeDataType = {
     redo: new StackList(),
 }
 
+// TODO Deal with this, you will have to understand context properly for this
 export const StoreContext = createContext<any>(null);
 
 const storeReducer = (state: storeDataType, action: storeAction) => {    
     switch(action.type){
         case TOGGLE_MENU_ACT:
-            //console.log("Toggle");
             return {
                 ...state,
                 dropMenu: {
@@ -55,7 +55,6 @@ const storeReducer = (state: storeDataType, action: storeAction) => {
                 }
             };
         case INITIALIZE_SEARCH_ACT:
-            //console.log("Initialize Search");
             if(action.payload){
                 return{
                     ...state,
@@ -77,7 +76,6 @@ const storeReducer = (state: storeDataType, action: storeAction) => {
                 return state;
             }
         case UPDATE_SEARCH_ACT:
-            //console.log("Update Search " + action.payload);
             return{
                 ...state,
                 search:{
@@ -102,11 +100,14 @@ const storeReducer = (state: storeDataType, action: storeAction) => {
                 }
             }
         case PUSH_UNDO_ACT:
-            if(action.payload && action.payload != state.undo.peek()) state.undo.push(action.payload);
-            console.log("Pushed: " + action.payload);
+            if(action.payload && action.payload != state.undo.peek()) {
+                state.undo.push(action.payload);
+                //If after undoing redo shouldn't happen with new values
+                state.redo.head == null;
+            };
             return state
         case PUSH_REDO_ACT:
-            if(!action.payload) state.redo.push(action.payload);
+            if(action.payload && action.payload != state.redo.peek()) state.redo.push(action.payload);
             return state;
         case POP_UNDO_ACT:
             state.undo.pop();

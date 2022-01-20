@@ -4,13 +4,6 @@ import ReplaceModal from "./components/ReplaceModal";
 import Textbox from "./components/Textbox";
 import { StoreContext } from "./store/Store";
 
-//TODO Find a solution to stop typescript from compiling deleted source files
-
-//TODO Create a search function that highlights and searched words
-
-//TODO Creata a replace function that replaces the found words with given word
-
-//TODO create modals for other options
 
 function App() {
 
