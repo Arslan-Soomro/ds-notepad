@@ -13,8 +13,8 @@ const Dropdown:FC = () => {
             {/* <button className="mb-2"><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 absolute top-2 right-2 text-primecolor-100" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button> */}
             <button className="text-sm text-left px-2 py-2 rounded-lg hover:bg-fneucolor-150 active:bg-fneucolor-200">Open</button>
             <button className="text-sm text-left px-2 py-2 rounded-lg hover:bg-fneucolor-150 active:bg-fneucolor-200">Save</button>
-            <button className="text-sm text-left px-2 py-2 rounded-lg hover:bg-fneucolor-150 active:bg-fneucolor-200">Undo</button>
-            <button className="text-sm text-left px-2 py-2 rounded-lg hover:bg-fneucolor-150 active:bg-fneucolor-200">Redo</button>
+            <button className="text-sm text-left px-2 py-2 rounded-lg hover:bg-fneucolor-150 active:bg-fneucolor-200">Undo <span className="text-xs text-fneucolor-300 ml-2">alt + z</span></button>
+            <button className="text-sm text-left px-2 py-2 rounded-lg hover:bg-fneucolor-150 active:bg-fneucolor-200">Redo <span className="text-xs text-fneucolor-300 ml-2">alt + y</span></button>
             {/*
             <button className="text-sm text-left p-2 rounded-lg hover:bg-fneucolor-150 active:bg-fneucolor-200">Find</button>
             <button className="text-sm text-left p-2 rounded-lg hover:bg-fneucolor-150 active:bg-fneucolor-200">Select All</button>
