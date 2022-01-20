@@ -4,21 +4,7 @@ import { sleep } from "../utils/utils";
 
 const Dropdown:FC = () => {
 
-    /*
-    useState for is hidden
-    useEffect(() => {
-        const transitionTime = 150;
-        
-        if(isVisible){
-            setHidden(true);
-        }else{
-            setTimeout(() => {
-                setHidden(false);
-            }, transitionTime);
-        }
-
-        
-    }, [isVisible]);*/
+    //TODO make clicking on other elements close the modal
 
     const [{dropMenu}, dispatch] = useContext(StoreContext);
 

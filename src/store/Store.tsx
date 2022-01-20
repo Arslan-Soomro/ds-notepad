@@ -1,30 +1,52 @@
 import { createContext, FC, useReducer } from "react";
-import { TOGGLE_MENU_ACT } from "./storeActions";
+import StackList from "../utils/StackList";
+import { INITIALIZE_TEXT_ACT, INITIALIZE_SEARCH_ACT, TOGGLE_MENU_ACT, TOGGLE_REPLACE_ACT, UPDATE_REPLACE_ACT, UPDATE_SEARCH_ACT, PUSH_UNDO_ACT, POP_UNDO_ACT, PUSH_REDO_ACT, POP_REDO_ACT } from "./storeActions";
 
-export const StoreContext = createContext<any>(undefined);
-
-interface storeAction {
+export interface storeAction {
     type: string;
     payload: any;
 }
 
-interface storeDataType{
+export interface storeDataType{
     dropMenu: {
         isVisible: boolean;
+    };
+    search: {
+        ref: null | HTMLInputElement;
+        dval: string;
+    };
+    replace: {
+        isVisible: boolean;
+        val: string;
     }
+    textRef: null | HTMLDivElement;
+    undo: StackList;
+    redo: StackList;
 }
 
-const initialState = {
+const initialState: storeDataType = {
     dropMenu : {
         isVisible: false,
-    }
-
+    },
+    search: {
+        ref: null,
+        dval: ""
+    },
+    replace: {
+        isVisible: false,
+        val: "",
+    },
+    textRef: null,
+    undo: new StackList(),
+    redo: new StackList(),
 }
+
+export const StoreContext = createContext<any>(null);
 
 const storeReducer = (state: storeDataType, action: storeAction) => {    
     switch(action.type){
         case TOGGLE_MENU_ACT:
-            console.log("Toggle");
+            //console.log("Toggle");
             return {
                 ...state,
                 dropMenu: {
@@ -32,6 +54,66 @@ const storeReducer = (state: storeDataType, action: storeAction) => {
                     isVisible: state.dropMenu.isVisible ? false : true,
                 }
             };
+        case INITIALIZE_SEARCH_ACT:
+            //console.log("Initialize Search");
+            if(action.payload){
+                return{
+                    ...state,
+                    search:{
+                        ...state.search,
+                        ref: action.payload
+                    }
+                }
+            }else{
+                return state;
+            }
+        case INITIALIZE_TEXT_ACT:
+            if(action.payload){
+                return{
+                    ...state,
+                    textRef: action.payload
+                }
+            }else{
+                return state;
+            }
+        case UPDATE_SEARCH_ACT:
+            //console.log("Update Search " + action.payload);
+            return{
+                ...state,
+                search:{
+                    ...state.search,
+                    dval: action.payload ? action.payload : "",
+                }
+            }
+        case TOGGLE_REPLACE_ACT:
+            return{
+                ...state,
+                replace:{
+                    ...state.replace,
+                    isVisible: state.replace.isVisible ? false : true,
+                }
+            }
+        case UPDATE_REPLACE_ACT:
+            return{
+                ...state,
+                replace:{
+                    ...state.replace,
+                    val: action.payload ? action.payload : "",
+                }
+            }
+        case PUSH_UNDO_ACT:
+            if(action.payload && action.payload != state.undo.peek()) state.undo.push(action.payload);
+            console.log("Pushed: " + action.payload);
+            return state
+        case PUSH_REDO_ACT:
+            if(!action.payload) state.redo.push(action.payload);
+            return state;
+        case POP_UNDO_ACT:
+            state.undo.pop();
+            return state;
+        case POP_REDO_ACT:
+            state.redo.pop();
+            return state;
         default:
             return state;
     }

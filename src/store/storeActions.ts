@@ -1,2 +1,10 @@
 export const TOGGLE_MENU_ACT = "toggle-menu";
 export const UPDATE_SEARCH_ACT = "update-search";
+export const INITIALIZE_SEARCH_ACT = "initialize-search";
+export const TOGGLE_REPLACE_ACT = "toggle-replace";
+export const UPDATE_REPLACE_ACT = "update-replace"
+export const INITIALIZE_TEXT_ACT = "initialize-text";
+export const PUSH_REDO_ACT = "push-redo";
+export const PUSH_UNDO_ACT = "push-undo";
+export const POP_REDO_ACT = "pop-redo";
+export const POP_UNDO_ACT = "pop-undo"
