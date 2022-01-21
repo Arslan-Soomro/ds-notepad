@@ -6,9 +6,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'titlefont': ['titlefont', 'serif'],
-        'headingfont': ['headingfont', 'serif'],
-        'textfont': ['textfont', 'serif'],
+        'titlefont': ['titlefont', 'sans-serif'],
+        'headingfont': ['headingfont', 'sans-serif'],
+        'textfont': ['textfont', 'sans-serif'],
       },
       colors: {
         primecolor: {
